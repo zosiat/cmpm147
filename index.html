@@ -2,7 +2,7 @@
 <html>
 <head>
 	<!-- This title is used for tabs and bookmarks -->
-	<title>Portfolio of My Name</title>
+	<title>Zosia Trela's Portfolio</title>
 
 	<!-- Use UTF character set, a good idea with any webpage -->
   <meta charset="UTF-8" />
@@ -14,27 +14,46 @@
 	<link rel="stylesheet" type="text/css" href="css/homepage.css">
 	<!-- Link to javascript file - DEFER waits until all elements are rendered -->
 	<script type="text/javascript" src="./js/experiment.js"></script>
+	<style>
+		/*buttons */
+		.experiment-links a {
+			display: inline-block;
+			margin: 5px 0;
+			padding: 8px 12px;
+			background-color: #4b6b4b; /* forest green */
+			color: #fff;
+			text-decoration: none;
+			border: none;
+			border-radius: 6px;
+			font-family: 'Quicksand', sans-serif;
+			transition: background-color 0.2s ease;
+		}
+
+		.experiment-links a:hover {
+			background-color: #355135;
+		}
+	</style>
 </head>
 <body>
 	<!-- Style this page by changing the CSS in ../css/site.css or css/experiment.css -->
 	<main id="content">
-        <h1>Portfolio of My Name</h1>
+        <h1><b>Zosia Trela's Portfolio</b></h1>
 		<section class="two-column">
 			<div class="minor-section">
 					<!-- Note that all filenames use lowercase and no spaces -->
                     <div class="image-wrapper">
                         <img class="cat-photo" src="./img/cute-grey-kitten.jpg">
                     </div>
-					<h2>About Me</h2>
-					<p>Tell us about yourself. Add photos. Customize this. Go crazy.</p>
+					<h2><b>About Me</b></h2>
+					<p>Hello! My name is Zosia, I am a third year CS: Game Design Major. My favorite games are Overwatch, Minecraft and GRIS. Other than games playing and making games, I love to hike and spend time outdoors. </p>
 			</div>
             <div class="minor-section">
-                <h2>Links to Experiments</h2>
-                <ul>
-                    <li><a href="./experiment1/index.html">Experiment 1</a></li>
-                    <li><a href="./experiment2/index.html">Experiment 2</a></li>
-                    <li><a href="./experiment3/index.html">Experiment 3</a></li>
-                </ul>
+                <h2><b>Experiments</b></h2>
+                <div class="experiment-links">
+                    <a href="./experiment1/index.html">Experiment 1</a><br>
+                    <a href="./experiment2/index.html">Experiment 2</a><br>
+                    <a href="./experiment3/index.html">Experiment 3</a>
+                </div>
             </div>
 
 		</section>

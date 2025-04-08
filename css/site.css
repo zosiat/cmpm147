@@ -1,23 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&display=swap');
+
 h1, h2 {
   margin: 0;
   padding: 0;
   /* font-size: 1.2em; */
   font-weight: lighter;
+  color: #1e3d1e; /* forest green */
+  font-family: 'Quicksand', sans-serif;
 }
 
 #content {
   width: calc(100% - 30px);
   margin: 10px;080;
   padding: 10px;
-  border: solid 1px #808;
-  font-family: sans-serif;
+  /* border: solid 1px #808; */
+  font-family: 'Quicksand', sans-serif;
+  background-color: #f7fbf5; /* soft background */
+  border-radius: 10px;
+  color: #2f4f2f; /* darker green text */
 }
 
 .minor-section {
   margin: 10px;
   padding: 10px;
-  border: solid 1px #A0A0A0;
+  border: solid 5px #4b6b4b; /* forest green */
   border-radius: 10px;
+  background-color: #f0f7ef; /* light sage */
 }
 
 .minor-section h2 {
@@ -28,6 +36,7 @@ h1, h2 {
 .image-wrapper img {
   max-width: 100%;
   height: auto;
+  border-radius: 8px; /* softened corners for nature vibe */
 }
 
 /* Set the canvas element to be the full size of the container */
@@ -44,6 +53,16 @@ canvas {
 
 .fullscreen-box button {
   font-size: 0.6em;
+  background-color: #4b6b4b; /* forest green */
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.fullscreen-box button:hover {
+  background-color: #355135;
 }
 
 body.is-fullscreen #canvas-container {
@@ -54,4 +73,6 @@ body.is-fullscreen #canvas-container {
   height: 100vh !important;
   margin: 0; /* Remove any default margins */
   z-index: 1000; /* Ensure it's above other content */
+  background-color: #f7fbf5; /* optional: match content bg */
 }
+

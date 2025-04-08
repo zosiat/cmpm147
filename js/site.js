@@ -1,6 +1,6 @@
 // index.js - purpose and description here
-// Author: Your Name
-// Date:
+// Author: Zosia Trela
+// Date: 4/7/25
 
 // make sure document is ready
 $(document).ready(function() {
