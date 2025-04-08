@@ -32,6 +32,27 @@
 		.experiment-links a:hover {
 			background-color: #355135;
 		}
+
+		/*photo styling */
+		.photo-row {
+			display: flex;
+			justify-content: center;
+			gap: 10px;
+			margin-top: 10px;
+		}
+
+		.photo-row img {
+			max-height: 800px;
+			max-width: 400px;
+			object-fit: cover;
+			border-radius: 8px;
+			box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+			transition: transform 0.2s ease;
+		}
+
+		.photo-row img:hover {
+			transform: scale(1.025);
+		}
 	</style>
 </head>
 <body>
@@ -41,12 +62,17 @@
 		<section class="two-column">
 			<div class="minor-section">
 					<!-- Note that all filenames use lowercase and no spaces -->
-                    <div class="image-wrapper">
-                        <img class="cat-photo" src="./img/cute-grey-kitten.jpg">
-                    </div>
-					<h2><b>About Me</b></h2>
-					<p>Hello! My name is Zosia, I am a third year CS: Game Design Major. My favorite games are Overwatch, Minecraft and GRIS. Other than games playing and making games, I love to hike and spend time outdoors. </p>
-			</div>
+					<div class="minor-section">
+						<!-- nphoto section -->
+						<div class="photo-row">
+							<img src="./img/photo2.png" alt="Photo 2">
+							<img src="./img/photo1.png" alt="Photo 1">
+							<img src="./img/photo3.png" alt="Photo 3">
+						</div>
+					
+						<h2><b>About Me</b></h2>
+						<p>Hello! My name is Zosia, I am a third year CS: Game Design Major. My favorite games are Overwatch, Minecraft and GRIS. Other than games playing and making games, I love to hike and spend time outdoors. </p>
+					</div>					
             <div class="minor-section">
                 <h2><b>Experiments</b></h2>
                 <div class="experiment-links">
