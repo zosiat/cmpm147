@@ -15,17 +15,17 @@ h1, h2 {
   padding: 10px;
   /* border: solid 1px #808; */
   font-family: 'Quicksand', sans-serif;
-  background-color: #f7fbf5;
+  background-color: #d7e6df;
   border-radius: 10px;
-  color: #2f4f2f;
+  color: #4e6e4e;
 }
 
 .minor-section {
   margin: 10px;
   padding: 10px;
-  border: solid 5px #4b6b4b;
+  border: solid 5px #6b8a6b;
   border-radius: 10px;
-  background-color: #91bbb0;
+  background-color: #b3cfc2;
 }
 
 .minor-section h2 {
@@ -53,7 +53,7 @@ canvas {
 
 .fullscreen-box button {
   font-size: 0.6em;
-  background-color: #4b6b4b; 
+  background-color: #4e6e4e; 
   color: white;
   border: none;
   padding: 4px 8px;
@@ -62,7 +62,7 @@ canvas {
 }
 
 .fullscreen-box button:hover {
-  background-color: #355135;
+  background-color: #4e6e4e;
 }
 
 body.is-fullscreen #canvas-container {
@@ -73,5 +73,5 @@ body.is-fullscreen #canvas-container {
   height: 100vh !important;
   margin: 0; /* Remove any default margins */
   z-index: 1000; /* Ensure it's above other content */
-  background-color:  #bbcec9;; /* optional: match content bg */
+  background-color:  #bbcec9; /* optional: match content bg */
 }
