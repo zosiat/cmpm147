@@ -1,6 +1,6 @@
-// project.js - purpose and description here
-// Author: Your Name
-// Date:
+// project.js - Living Impressions: Glacier National Park
+// Author: Zosia Trela
+// Date: 04/14/25
 
 // NOTE: This is how we might start a basic JavaaScript OOP project
 
