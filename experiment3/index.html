@@ -2,7 +2,7 @@
 <html>
 <head>
 	<!-- This title is used for tabs and bookmarks -->
-	<title>Experiment X - Subject/Topic</title>
+	<title>Experiment 3 - Alternate Worlds</title>
 
 	<!-- Use UTF character set, a good idea with any webpage -->
 	<meta charset="UTF-8" />
@@ -32,11 +32,15 @@
 	<main id="content">
 		<section>
 
-			<h1>Experiment X - Subject/Topic</h1>
+			<h1>Experiment 3 - Alternate Worlds</h1>
 
 			<div class="minor-section">
-				<div id="canvas-container">
-					<!-- canvas will be added here -->
+				<div class="minor-section">
+					<button id="reseed">reseed</button>
+					<div id="box"></div>
+					<!-- sketch 1 -->
+					<div id="s1" style="margin: 20px auto; width: fit-content;"></div>
+				</div>
 				</div>
                 <div class="fullscreen-box">
                     <button id="fullscreen">Fullscreen</button>
@@ -45,17 +49,17 @@
 
 			<div class="minor-section">
 				<h2>Description</h2>
-				<p>What are you trying to acomplish with this experiment?</p>
+				<p>This project uses generative design and tiles to make a landscape. The goal of this project is to learn how to separate offline generation of a datastructure from online rendering. Additionally, the goal is to use autotiling to have smooth transition tiles.</p>
 			</div>
 
 			<div class="minor-section">
 				<h2>Technical</h2>
-				<p>Describe in detail what you did technically and how it works?</p>
+				<p>The main thing that makes the transition tiles look so smooth for the walls of the dungeon / edge of the lake are creating adjacency rules. For example, if the tile to the right and underneath the lake is a grass tile, but the tile above it is a water tile, then it is an edge tile. This means that the selected tile has to be a corner tile, specifically the bottom right corner. In simple terms, the steps taken to generate my landscapes are generating a grid with lakes, that are marked by '.'. I use a helper function to ensure the rooms don't generate on top of each other. Then, the grid is drawn and filled with tiles which follow the rules in the handleWalls() function.</p>
 			</div>
 
 			<div class="minor-section">
 				<h2>Reflection</h2>
-				<p>Each person that worked on the code should reflect on the process, the difficulties, and the successes of the experiment.</p>
+				<p>Setting up the rules took a bit of figuring out, and then I remembered I had done a similar project before. I was able to look back on it and understand how the rules for that generator worked. Even though I ended up working out how to work the transition tiles, I did fail in a few ways. Specifically, I really wanted to add chests that open and close in my dungeon generator. Although I put in a good amount of time trying to get it to work, I ended up giving up and opting to just have static chests as decoration.</p>
 			</div>
 
 		</section>

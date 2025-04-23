@@ -10,6 +10,9 @@
 const VALUE1 = 1;
 const VALUE2 = 2;
 
+const CANVAS_WIDTH = 600;
+const CANVAS_HEIGHT = 400;
+
 // Globals
 let myInstance;
 let canvasContainer;
@@ -38,17 +41,13 @@ function resizeScreen() {
 function setup() {
   // place our canvas, making it fit our container
   canvasContainer = $("#canvas-container");
-  let canvas = createCanvas(canvasContainer.width(), canvasContainer.height());
+  let canvas = createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT);
   canvas.parent("canvas-container");
   // resize canvas is the page is resized
 
   // create an instance of the class
   myInstance = new MyClass("VALUE1", "VALUE2");
 
-  $(window).resize(function() {
-    resizeScreen();
-  });
-  resizeScreen();
 }
 
 let seed = 239;
