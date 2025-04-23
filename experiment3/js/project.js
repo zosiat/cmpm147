@@ -153,8 +153,170 @@ var overworldSketch = function(p) {
   };
 };
 
-console.log(document.getElementById("overworldSketch")); // should not be null
+// for html button
 var overworldCanvas = new p5(overworldSketch, 's1');
+
+// dungeon sketch using instance mode
+var dungeonSketch = function(p) {
+  let grid;
+  let chestFrameCounter = 0;
+  let chestCoords = [];
+  let tileset;
+  let tileSize = 32;
+
+  p.preload = function() {
+    tileset = p.loadImage('../img/tileset.png');
+  };
+
+  p.setup = function() {
+    p.createCanvas(400, 400);
+    grid = generateGrid(20, 20);
+    tileSize = p.floor(p.width / grid[0].length);
+    p.noSmooth();
+  };
+
+  p.draw = function() {
+    p.background(100);
+    drawGrid(grid);
+    chestFrameCounter++;
+  };
+
+  function generateGrid(numCols, numRows) {
+    let grid = [];
+    chestCoords = [];
+
+    for (let i = 0; i < numRows; i++) {
+      let row = [];
+      for (let j = 0; j < numCols; j++) {
+        row.push("_");
+      }
+      grid.push(row);
+    }
+
+    // first room
+    let x1 = p.floor(p.random(2, numCols - 5));
+    let y1 = p.floor(p.random(2, numRows - 5));
+    let x2 = p.floor(p.random(x1 + 3, numCols - 1));
+    let y2 = p.floor(p.random(y1 + 3, numRows - 1));
+
+    for (let i = y1; i <= y2; i++) {
+      for (let j = x1; j <= x2; j++) {
+        grid[i][j] = ".";
+      }
+    }
+
+    // second room
+    let x3, y3, x4, y4;
+    do {
+      x3 = p.floor(p.random(2, numCols - 5));
+      y3 = p.floor(p.random(2, numRows - 5));
+      x4 = p.floor(p.random(x3 + 3, numCols - 1));
+      y4 = p.floor(p.random(y3 + 3, numRows - 1));
+    } while (isRoomOverlap(x1, y1, x2, y2, x3, y3, x4, y4));
+
+    for (let i = y3; i <= y4; i++) {
+      for (let j = x3; j <= x4; j++) {
+        grid[i][j] = ".";
+      }
+    }
+
+    // chest chance
+    if (p.random() < 0.25) {
+      let chestX = p.floor(p.random(x1 + 1, x2));
+      let chestY = p.floor(p.random(y1 + 1, y2));
+      chestCoords.push({ x: chestX, y: chestY, offset: p.floor(p.random(0, 100)) });
+    }
+
+    if (p.random() < 0.5) {
+      let chestX = p.floor(p.random(x3 + 1, x4));
+      let chestY = p.floor(p.random(y3 + 1, y4));
+      chestCoords.push({ x: chestX, y: chestY, offset: p.floor(p.random(0, 100)) });
+    }
+
+    return grid;
+  }
+
+  let rockVariants = {};
+
+  function drawGrid(grid) {
+    for (let i = 0; i < grid.length; i++) {
+      for (let j = 0; j < grid[i].length; j++) {
+        let code = grid[i][j];
+
+        if (code === ".") {
+          let top = grid[i - 1]?.[j];
+          let bottom = grid[i + 1]?.[j];
+          let left = grid[i]?.[j - 1];
+          let right = grid[i]?.[j + 1];
+
+          if (top === "_" || bottom === "_" || left === "_" || right === "_") {
+            handleWalls(grid, i, j);
+          } else {
+            placeTile(i, j, 0, 8);
+          }
+        } else {
+          // background wall tile
+          let key = `${i},${j}`;
+          if (!(key in rockVariants)) {
+            rockVariants[key] = p.floor(p.random(0, 3)); 
+          }
+          let randI = rockVariants[key];
+          placeTile(i, j, randI, 9);
+        }
+        
+      }
+    }
+
+    for (let chest of chestCoords) {
+      let chestOptions = [[3, 30], [0, 30]];
+      let index = p.floor(((chestFrameCounter + chest.offset) / 70) % chestOptions.length);
+      let sprite = chestOptions[index];
+      placeTile(chest.y, chest.x, sprite[0], sprite[1]);
+    }
+  }
+
+  function handleWalls(grid, i, j) {
+    let top = grid[i - 1]?.[j];
+    let bottom = grid[i + 1]?.[j];
+    let left = grid[i]?.[j - 1];
+    let right = grid[i]?.[j + 1];
+
+    if (top === "_" && left === "_") {
+      placeTile(i, j, 4, 9);
+    } else if (top === "_" && right === "_") {
+      placeTile(i, j, 6, 9);
+    } else if (bottom === "_" && left === "_") {
+      placeTile(i, j, 4, 11);
+    } else if (bottom === "_" && right === "_") {
+      placeTile(i, j, 6, 11);
+    } else if (top === "_") {
+      placeTile(i, j, 5, 9);
+    } else if (bottom === "_") {
+      placeTile(i, j, 5, 11);
+    } else if (left === "_") {
+      placeTile(i, j, 4, 10);
+    } else if (right === "_") {
+      placeTile(i, j, 6, 10);
+    }
+  }
+
+  function isRoomOverlap(x1, y1, x2, y2, x3, y3, x4, y4) {
+    return !(x2 < x3 || x4 < x1 || y2 < y3 || y4 < y1);
+  }
+
+  function placeTile(row, col, spriteX, spriteY) {
+    p.noStroke();
+    p.image(tileset, col * tileSize, row * tileSize, tileSize, tileSize, spriteX * 8, spriteY * 8, 8, 8);
+  }
+
+  // reseed method
+  p.reseed = function() {
+    grid = generateGrid(20, 20);
+  };
+};
+
+// for html
+var dungeonCanvas = new p5(dungeonSketch, 's2');
 
 // reseed button
 document.addEventListener("DOMContentLoaded", function() {
@@ -163,6 +325,9 @@ document.addEventListener("DOMContentLoaded", function() {
     button.addEventListener("click", function() {
       if (overworldCanvas.reseed) {
         overworldCanvas.reseed();
+      }
+      if (dungeonCanvas.reseed) {
+        dungeonCanvas.reseed();
       }
     });
   }
