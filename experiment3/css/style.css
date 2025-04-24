@@ -17,3 +17,32 @@ body {
     width: 100%;
     height: 600px;
 }
+
+.sketch-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+.custom-button {
+    background-color: #5a875a;
+    color: white;
+    border: none;
+    padding: 5px 20px;
+    margin: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+    text-decoration: none;
+  }
+  
+  .custom-button:hover {
+    background-color: #4e6e4e;
+  }
+  
+  nav li {
+    display: inline-block;
+  }
+  

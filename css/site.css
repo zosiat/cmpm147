@@ -53,10 +53,11 @@ canvas {
 
 .fullscreen-box button {
   font-size: 0.6em;
-  background-color: #4e6e4e; 
+  background-color: #5a875a; 
   color: white;
   border: none;
-  padding: 4px 8px;
+  padding: 5px 20px;
+  margin: 5px 15px;
   border-radius: 5px;
   cursor: pointer;
 }

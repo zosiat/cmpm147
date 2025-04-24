@@ -35,8 +35,8 @@
 			<h1>Experiment 3 - Alternate Worlds</h1>
 
 			<div class="minor-section">
-				<div class="minor-section">
-					<button id="reseed">reseed</button>
+				<button id="reseed" class="custom-button">reseed</button>
+				<div class="sketch-container">
 					<div id="box"></div>
 					<!-- sketch 1 -->
 					<div id="s1" style="margin: 20px auto; width: fit-content;"></div>
@@ -56,20 +56,18 @@
 
 			<div class="minor-section">
 				<h2>Technical</h2>
-				<p>The main thing that makes the transition tiles look so smooth for the walls of the dungeon / edge of the lake are creating adjacency rules. For example, if the tile to the right and underneath the lake is a grass tile, but the tile above it is a water tile, then it is an edge tile. This means that the selected tile has to be a corner tile, specifically the bottom right corner. In simple terms, the steps taken to generate my landscapes are generating a grid with lakes, that are marked by '.'. I use a helper function to ensure the rooms don't generate on top of each other. Then, the grid is drawn and filled with tiles which follow the rules in the handleWalls() function.</p>
+				<p>The main aspect that makes the transition tiles look so smooth for the walls of the dungeon/ edge of the lake are creating adjacency rules. For example, if the tile to the right and underneath the lake is a grass tile, but the tile above it is a water tile, then it is an edge tile. This means that the selected tile has to be a corner tile, specifically the bottom right corner. In simple terms, the steps taken to generate my landscapes are generating a grid with lakes, that are marked by '.'. I use a helper function to ensure the rooms don't generate on top of each other. Then, the grid is drawn and filled with tiles which follow the rules in the handleWalls() function.</p>
 			</div>
 
 			<div class="minor-section">
 				<h2>Reflection</h2>
-				<p>Setting up the rules took a bit of figuring out, and then I remembered I had done a similar project before. I was able to look back on it and understand how the rules for that generator worked. Even though I ended up working out how to work the transition tiles, I did fail in a few ways. Specifically, I really wanted to add chests that open and close in my dungeon generator. Although I put in a good amount of time trying to get it to work, I ended up giving up and opting to just have static chests as decoration.</p>
+				<p>Throughout this project, I struggled with various issues, such as setting up tile adjacency rules, creating rooms and lakes that do not overlap, and tile animations. I enjoyed playing with different aspects of the worlds to make them feel less static. The real challenge, though, was adding both of these projects so that they could be displayed on the same page simultaneously. I had to turn the projects, which were originally designed on Glitch, into instance mode. Overall, I'm proud of how this project turned out. It may look simple, but it took a good amount of time and effort, and I'm proud of my work.</p>
 			</div>
 
 		</section>
 		<nav id="links" class="minor-section">
 			<!-- Put link back to homepage here. -->
-            <ul>
-                <li><a href="../index.html">Home</a></li>
-            </ul>
+				<li><a href="../index.html" class="custom-button">Home</a></li>
 		</nav>
 	</main>
 </body>
