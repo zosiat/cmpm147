@@ -59,10 +59,9 @@ function setup() {
   let canvas = createCanvas(800, 600);
   canvas.parent('s1');
 
-  worldSeed = XXH.h32("default", 0);
-  noiseSeed(worldSeed);
-  randomSeed(worldSeed);
+  setSeed("default");
 
+  // setup button click
   let button = document.getElementById("setSeedButton");
   button.addEventListener("click", () => {
     let val = document.getElementById("seedInput").value;
@@ -70,9 +69,6 @@ function setup() {
       setSeed(val.trim());
     }
   });
-
-  // initialize the camera position
-  cameraPos = { x: 0, y: 0 };
 }
 
 function draw() {
@@ -176,4 +172,14 @@ function mousePressed() {
       }
     }
   }
+}
+
+function setSeed(str) {
+  worldSeed = XXH.h32(str, 0);
+  noiseSeed(worldSeed);
+  randomSeed(worldSeed);
+
+  // clear previous world state
+  tileType = {};
+  clicks = {};
 }
