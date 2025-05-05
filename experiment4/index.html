@@ -24,6 +24,8 @@
     <script type="text/javascript" src="../js/site.js" DEFER></script>
 	<!-- Include xxhash.min.js before project.js -->
 	<script type="text/javascript" src="./js/xxhash.min.js" DEFER></script>
+
+	<script type="text/javascript" src="./js/engine.js" DEFER></script>
 	<!-- Use me for a JavaScript OOP Project -->
 	<script type="text/javascript" src="./js/project.js" DEFER></script>
 	<!-- Use me for a p5.js project -->
@@ -37,7 +39,8 @@
 			<h1>Experiment 4 - Infinite Worlds</h1>
 
 			<div class="minor-section">
-				<button id="reseed" class="custom-button">reseed</button>
+				<input type="text" id="seedInput" placeholder="Enter world seed" />
+				<button id="setSeedButton">Set Seed</button>
 				<div class="sketch-container">
 					<div id="box"></div>
 					<!-- sketch 1 -->
@@ -53,17 +56,17 @@
 
 			<div class="minor-section">
 				<h2>Description</h2>
-				<p></p>
+				<p>This project creates 3 different infinite worlds that tell a story. The first shows a lush forest where the player can select a location to place a tent. The second shows the same environment but deforested, where users can click on trees to chop them down. Then, the final world shows a forest that is slowly healing, and players can place new trees to revive the environment.</p>
 			</div>
 
 			<div class="minor-section">
 				<h2>Technical</h2>
-				<p></p>
+				<p>All assets are from the nature kit provided by Kenney Assets. These projects use Perlin noise to generate smooth transitions in the tile height. For all three projects, I used flags for the water tiles so that editing them is not allowed. For the deforested landscape, I added a flag similar to the water flag, but this one was for detect if a tree exists on a tile. This determined if players can interact with it. Then, the decor, such as grass and stumps, was separated from the trees in order to simplify logic. Then, for reforestation, the same logic was reused but this time, to place trees rather than remove them. Similarly, flags were key.</p>
 			</div>
 
 			<div class="minor-section">
 				<h2>Reflection</h2>
-				<p></p>
+				<p>I put a lot of time and effort into the logic for the 3d tiles. The biggest issue I had was making sure that objects being placed on said tiles matched the height. I did this by setting an offset based on the height of each tile. This way, if a tree is placed on the tallest tile type, it won't appear to be cut in half. I also wanted to make it so that users can have a visual representation of what tiles they can change. I did this by having the tile outline that appears when the world is hovered over be either red, to represent tiles that are occupied or ineligible, and green, to represent tiles that players can edit. Then, I had some friends try out my projects without giving them any hints, and they were able to quickly figure out what to do.</p>
 			</div>
 
 		</section>
