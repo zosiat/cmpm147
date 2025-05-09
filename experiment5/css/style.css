@@ -8,14 +8,25 @@ canvas {
 
 /* Center the canvas element on the page */
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
 }
 
 #canvas-container {
     width: 100%;
     height: 600px;
+}
+
+.results-top {
+    display: flex;
+    justify-content: flex-start; /* aligns to the left */
+    gap: 20px;
+    flex-wrap: wrap; /* optional: lets them wrap on small screens */
+}
+
+.image-container {
+    text-align: center;
 }
 
 .sketch-container {

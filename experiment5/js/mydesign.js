@@ -1,17 +1,26 @@
 /* exported p4_inspirations, p4_initialize, p4_render, p4_mutate */
 
+let shapeStyle = 'box';
+
+$('#shape-style').on('change', function () {
+  shapeStyle = $(this).val();
+  if (currentInspiration) {
+    currentDesign = initDesign(currentInspiration);
+    redraw(); // force update
+  }
+});
 
 function getInspirations() {
     return [
       {
-        name: "Selfie", 
-        assetUrl: "../img/photo1.png",
-        credit: "Selfie by Zosia Trela, 2024"
-      },
-      {
         name: "Yosemite Waterfall", 
         assetUrl: "../img/photo2.png",
         credit: "Yosemite Waterfall and Rainbow by Zosia Trela, 2024"
+      },
+      {
+        name: "Selfie", 
+        assetUrl: "../img/photo1.png",
+        credit: "Selfie by Zosia Trela, 2024"
       },
       {
         name: "Above the Waterfall", 
@@ -44,7 +53,8 @@ function initDesign(inspiration) {
   // initialize design with random boxes within the same 300px canvas
   let design = {
     bg: 128,
-    fg: []
+    fg: [],
+    shapeStyle: shapeStyle
   };
 
   for (let i = 0; i < 100; i++) {
@@ -55,6 +65,25 @@ function initDesign(inspiration) {
     let r = pixels[idx];
     let g = pixels[idx + 1];
     let b = pixels[idx + 2];
+
+  if (shapeStyle === 'triangle') {
+    design.fg.push({
+      points: [
+        x, y,
+        x + random(-100, 100), y + random(-100, 100),
+        x + random(-100, 100), y + random(-100, 100)
+      ],
+      fill: [r, g, b]
+    });
+  } else if (shapeStyle === 'ellipse') {
+    design.fg.push({
+      x: x,
+      y: y,
+      rx: random(canvasWidth / 4),
+      ry: random(canvasHeight / 4),
+      fill: [r, g, b]
+    });
+  } else {
     design.fg.push({
       x: x,
       y: y,
@@ -63,6 +92,7 @@ function initDesign(inspiration) {
       fill: [r, g, b]
     });
   }
+}
 
   return design;
 }
@@ -70,22 +100,50 @@ function initDesign(inspiration) {
 function renderDesign(design, inspiration) {
   background(design.bg);
   noStroke();
-  for (let box of design.fg) {
-    fill(box.fill[0], box.fill[1], box.fill[2], 128);
-    rect(box.x, box.y, box.w, box.h);
+
+  let shapeStyle = design.shapeStyle;
+
+  for (let shape of design.fg) {
+    fill(shape.fill[0], shape.fill[1], shape.fill[2], 128);
+
+    if (shape.points) {
+      beginShape();
+      for (let i = 0; i < shape.points.length; i += 2) {
+        vertex(shape.points[i], shape.points[i + 1]);
+      }
+      endShape(CLOSE);
+    } else if (shape.w && shape.h) {
+      rect(shape.x, shape.y, shape.w, shape.h);
+    } else if (shape.rx && shape.ry) {
+      ellipse(shape.x, shape.y, shape.rx * 2, shape.ry * 2);
+    }
   }
 }
 
 function mutateDesign(design, inspiration, rate) {
+
+let shapeStyle = design.shapeStyle;
+
+
   design.bg = mut(design.bg, 0, 255, rate);
-  for (let box of design.fg) {
-    box.fill[0] = mut(box.fill[0], 0, 255, rate);
-    box.fill[1] = mut(box.fill[1], 0, 255, rate);
-    box.fill[2] = mut(box.fill[2], 0, 255, rate);
-    box.x = mut(box.x, 0, width, rate);
-    box.y = mut(box.y, 0, height, rate);
-    box.w = mut(box.w, 0, width / 2, rate);
-    box.h = mut(box.h, 0, height / 2, rate);
+  for (let shape of design.fg) {
+    if (shape.fill) {
+      shape.fill[0] = mut(shape.fill[0], 0, 255, rate);
+      shape.fill[1] = mut(shape.fill[1], 0, 255, rate);
+      shape.fill[2] = mut(shape.fill[2], 0, 255, rate);
+    }
+
+    if (shape.points) {
+      for (let i = 0; i < shape.points.length; i++) {
+        let maxVal = i % 2 === 0 ? width : height;
+        shape.points[i] = mut(shape.points[i], 0, maxVal, rate);
+      }
+    } else {
+      shape.x = mut(shape.x, 0, width, rate);
+      shape.y = mut(shape.y, 0, height, rate);
+      shape.w = mut(shape.w, 0, width / 2, rate);
+      shape.h = mut(shape.h, 0, height / 2, rate);
+    }
   }
 }
 
