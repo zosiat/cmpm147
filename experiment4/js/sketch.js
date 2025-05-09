@@ -95,6 +95,17 @@ function draw() {
       pop();
     }
   }
+
+    // draw hover highlight after tiles are drawn
+    let mx = cameraPos.x;
+    let my = cameraPos.y;
+    let isoI = Math.round((mx / tw + my / (th / 2)) / 2);
+    let isoJ = Math.round((my / (th / 2) - mx / tw) / 2);
+  
+    push();
+    translate((isoI - isoJ) * tw, (isoI + isoJ) * th / 2);
+    p3_drawSelectedTile(isoI, isoJ);
+    pop();
 }
 
 function drawTile(i, j) {
@@ -150,6 +161,19 @@ function drawTile(i, j) {
     else if (isLarge) yOffset = -32;
     image(tent, 0, yOffset, tent.width / 2, tent.height / 2);
   }
+
+  let mx = cameraPos.x;
+let my = cameraPos.y;
+
+// Convert screen coordinates to tile coordinates
+let isoI = Math.round((mx / tw + my / (th / 2)) / 2);
+let isoJ = Math.round((my / (th / 2) - mx / tw) / 2);
+
+push();
+translate((isoI - isoJ) * tw, (isoI + isoJ) * th / 2);
+p3_drawSelectedTile(isoI, isoJ);
+pop();
+
 }
 
 function mousePressed() {
@@ -173,6 +197,40 @@ function mousePressed() {
     }
   }
 }
+
+function p3_drawSelectedTile(i, j) {
+  push();
+
+  let tile = tileType[[i-1, j-1]];
+  let isWater;
+  if (tile !== undefined) {
+    isWater = tile.isWater;
+  } else {
+    let n = noise(i * 0.1, j * 0.1);
+    isWater = (n < 0.25);
+  }
+
+  noFill();
+  if (isWater) {
+    stroke(255, 0, 0, 128);
+  } else {
+    stroke(0, 255, 0, 128);
+  }
+
+  beginShape();
+  vertex(-tw, 0);
+  vertex(0, th);
+  vertex(tw, 0);
+  vertex(0, -th);
+  endShape(CLOSE);
+
+  noStroke();
+  fill(100);
+  text("tile " + [i, j], 0, 0);
+
+  pop();
+}
+
 
 function setSeed(str) {
   worldSeed = XXH.h32(str, 0);
